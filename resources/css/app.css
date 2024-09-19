@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-4xl;
+        @apply font-bold;
+    }
+    h2 {
+        @apply text-3xl;
+        @apply font-bold;
+    }
+    h3 {
+        @apply text-2xl;
+        @apply font-bold;
+    }
+    h4 {
+        @apply text-xl;
+        @apply font-semibold;
+    }
+    h5 {
+        @apply text-base; /* text-md yerine text-base kullan */
+        @apply font-semibold;
+    }
+    h6 {
+        @apply text-sm;
+        @apply font-semibold;
+    }
+  }
+
+@layer base {
+    ul,
+    ol {
+        list-style: revert;
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateY(40%);
+    }
+    50% {
+        transform: translateY(90%);
+    }
+    100% {
+        transform: translateY(40%);
+    }
+}
+
+.animate-scroll {
+    animation: scroll 2s linear infinite;
+    transform: translateY(40%);
+}
+
+/* Scrollbar için temel stiller */
+::-webkit-scrollbar {
+    width: 8px; /* Scrollbar genişliği */
+    height: 8px; /* Yatay scrollbar genişliği */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar çekirdeği rengi */
+    border-radius: 4px; /* Köşeleri yuvarlatma */
+    transition: background-color 0.3s; /* Hover efekti için geçiş süresi */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Scrollbar üzerine gelindiğinde rengi değişir */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Scrollbar arka plan rengi */
+    border-radius: 4px; /* Köşeleri yuvarlatma */
+}
+
+::-webkit-scrollbar-track:hover {
+    background-color: #e1e1e1; /* Scrollbar arka planının üzerine gelindiğinde rengi değişir */
+}
+
+/* For summernote override unordered and order list */
+.note-editable ul {
+    list-style: disc !important;
+    list-style-position: inside !important;
+}
+
+.note-editable ol {
+    list-style: decimal !important;
+    list-style-position: inside !important;
+}
+
+@media only screen and (min-width: 768px) {
+    .parent:hover .child {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+        transform: translateY(0);
+    }
+
+    .child {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+        transform: translateY(-10%);
+    }
+}
+
+/* Mobile Dropdown Transition */
+.transition-transform {
+    transition: transform 0.3s ease, opacity 0.3s ease, max-height 0.3s ease;
+}
+
+.transform-scale-0 {
+    transform: scaleY(0);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.transform-scale-100 {
+    transform: scaleY(1);
+    opacity: 1;
+    overflow-y: auto;
+    width: 100%;
+    max-height: 500px;
+    /* Adjust this value as needed */
+}
