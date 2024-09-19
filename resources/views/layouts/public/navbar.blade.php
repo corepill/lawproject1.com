@@ -1,6 +1,11 @@
-<div class="fixed w-full z-50 top-0 left-0">
+<div x-data="{ isScrolled: false }" x-init="() => {
+    window.addEventListener('scroll', () => {
+        isScrolled = window.scrollY > 50;
+    });
+}" class="fixed w-full z-50 top-0 left-0 transition-colors duration-300">
     <!-- Desktop Menu -->
-    <nav class="hidden lg:flex px-16 items-center justify-between relative py-5 text-white">
+    <nav :class="{ 'bg-white': isScrolled, 'text-black': isScrolled, 'text-white': !isScrolled }"
+        class="hidden lg:flex px-16 items-center justify-between relative py-5">
         <div>
             <img src="{{ asset('assets/images/logoipsum-317.svg') }}" alt="lorem hukuk logo">
         </div>
@@ -19,7 +24,7 @@
                     </svg>
                 </div>
                 <ul
-                    class="child transition duration-300 md:absolute top-full right-0 md:w-max bg-white md:shadow-lg md:rounded-b text-black list-none">
+                    class="child transition duration-700 md:absolute top-full right-0 md:w-max bg-white md:shadow-lg md:rounded-b text-black list-none">
                     <li>
                         <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
                             Ticaret Hukuku
@@ -81,7 +86,7 @@
                     </svg>
                 </div>
                 <ul
-                    class="child transition duration-300 md:absolute top-full right-0 md:w-52 bg-white md:shadow-lg md:rounded-b text-black list-none">
+                    class="child transition duration-700 md:absolute top-full right-0 md:w-52 bg-white md:shadow-lg md:rounded-b text-black list-none">
                     <li>
                         <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
                             Hakkımızda
@@ -120,7 +125,7 @@
                     </svg>
                 </div>
                 <ul
-                    class="child transition duration-300 md:absolute top-full right-0 md:w-max md:min-w-20 bg-white md:shadow-lg md:rounded-b text-black">
+                    class="child transition duration-700 md:absolute top-full right-0 md:w-max md:min-w-20 bg-white md:shadow-lg md:rounded-b text-black list-none">
                     <li>
                         <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
                             TR
@@ -142,7 +147,7 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <nav class="lg:hidden  border-b shadow-lg" x-data="{ open: false, dropdownOpen: false }">
+    <nav class="lg:hidden border-b shadow-lg bg-white" x-data="{ open: false, activeDropdown: null }">
         <div class="flex items-center justify-between p-4">
             <div>
                 <img src="{{ asset('assets/images/logoipsum-317.svg') }}" alt="lorem hukuk logo">
@@ -157,12 +162,12 @@
         </div>
 
         <!-- Mobile Menu Links -->
-        <ul class="transition-transform transform-scale-0 duration-300 bg-white"
+        <ul class="transition-transform transform-scale-0 duration-1000 bg-white"
             :class="{ 'transform-scale-100': open, 'transform-scale-0': !open }"
-            x-transition:enter="transition ease-out duration-300"
+            x-transition:enter="transition ease-out duration-1000"
             x-transition:enter-start="transform scale-y-0 opacity-0"
             x-transition:enter-end="transform scale-y-100 opacity-100"
-            x-transition:leave="transition ease-in duration-300"
+            x-transition:leave="transition ease-in duration-1000"
             x-transition:leave-start="transform scale-y-100 opacity-100"
             x-transition:leave-end="transform scale-y-0 opacity-0">
 
@@ -172,20 +177,20 @@
                     <span>Ana Sayfa</span>
                 </a>
             </li>
-            <li x-data="{ openDropdown: false }">
+            <li>
                 <a href="#" class="p-4 hover:bg-gray-50 flex justify-between items-center"
-                    @click="openDropdown = !openDropdown">
+                    @click="activeDropdown === 1 ? activeDropdown = null : activeDropdown = 1">
                     <span>Hizmetler</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
                     </svg>
                 </a>
-                <ul class="transition-transform transform-scale-0 duration-300 bg-white text-sm"
-                    :class="{ 'transform-scale-100': openDropdown, 'transform-scale-0': !openDropdown }"
-                    x-transition:enter="transition ease-out duration-300"
+                <ul class="transition-transform transform-scale-0 duration-1000 bg-white text-sm"
+                    :class="{ 'transform-scale-100': activeDropdown === 1, 'transform-scale-0': activeDropdown !== 1 }"
+                    x-transition:enter="transition ease-out duration-1000"
                     x-transition:enter-start="transform scale-y-0 opacity-0"
                     x-transition:enter-end="transform scale-y-100 opacity-100"
-                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave="transition ease-in duration-1000"
                     x-transition:leave-start="transform scale-y-100 opacity-100"
                     x-transition:leave-end="transform scale-y-0 opacity-0">
                     <li>
@@ -233,28 +238,28 @@
                             Ceza Hukuku
                         </a>
                     </li>
-
                 </ul>
             </li>
+
             <li>
                 <a href="#" class="block p-4 hover:bg-gray-50">
                     <span>Blog</span>
                 </a>
             </li>
-            <li x-data="{ openDropdown: false }">
+            <li>
                 <a href="#" class="p-4 hover:bg-gray-50 flex justify-between items-center"
-                    @click="openDropdown = !openDropdown">
+                    @click="activeDropdown === 2 ? activeDropdown = null : activeDropdown = 2">
                     <span>Kurumsal</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                         <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
                     </svg>
                 </a>
-                <ul class="transition-transform transform-scale-0 duration-300 bg-white text-sm"
-                    :class="{ 'transform-scale-100': openDropdown, 'transform-scale-0': !openDropdown }"
-                    x-transition:enter="transition ease-out duration-300"
+                <ul class="transition-transform transform-scale-0 duration-1000 bg-white text-sm"
+                    :class="{ 'transform-scale-100': activeDropdown === 2, 'transform-scale-0': activeDropdown !== 2 }"
+                    x-transition:enter="transition ease-out duration-1000"
                     x-transition:enter-start="transform scale-y-0 opacity-0"
                     x-transition:enter-end="transform scale-y-100 opacity-100"
-                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave="transition ease-in duration-1000"
                     x-transition:leave-start="transform scale-y-100 opacity-100"
                     x-transition:leave-end="transform scale-y-0 opacity-0">
                     <li>
@@ -279,6 +284,7 @@
                     </li>
                 </ul>
             </li>
+
             <li>
                 <a href="#" class="block p-4 hover:bg-gray-50">
                     <span>İletişim</span>
