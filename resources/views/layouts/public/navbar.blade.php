@@ -147,7 +147,7 @@
     </nav>
 
     <!-- Mobile Menu -->
-    <nav class="lg:hidden border-b shadow-lg bg-white" x-data="{ open: false, activeDropdown: null }">
+    <nav class="lg:hidden shadow-lg bg-white" x-data="{ open: false, activeDropdown: null }">
         <div class="flex items-center justify-between p-4">
             <div>
                 <img src="{{ asset('assets/images/logoipsum-317.svg') }}" alt="lorem hukuk logo">
