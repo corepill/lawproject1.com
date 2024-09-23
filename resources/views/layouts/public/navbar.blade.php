@@ -6,19 +6,19 @@
     <!-- Desktop Menu -->
     <nav :class="{ 'bg-white': isScrolled, 'text-black': isScrolled, 'text-white': !isScrolled }"
         class="hidden lg:flex px-16 items-center justify-between relative py-5">
-        <div>
+        <a href="/">
             <img src="{{ asset('assets/images/logoipsum-317.svg') }}" alt="lorem hukuk logo">
-        </div>
+        </a>
         <ul class="flex list-none">
             <li>
-                <a href="#" class="flex md:inline-flex p-4 items-center hover:text-gray-300">
+                <a href="/" class="flex md:inline-flex p-4 items-center hover:text-gray-300">
                     <span>Ana Sayfa</span>
                 </a>
             </li>
             <li class="relative parent">
                 <div
                     class="flex justify-between md:inline-flex p-4 items-center hover:text-gray-300 space-x-2 cursor-pointer">
-                    <a href="">Hizmetler</a>
+                    <a href="/hizmetler">Hizmetler</a>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current pt-1" viewBox="0 0 24 24">
                         <path d="M0 7.33l2.829-2.83 9.175 9.339 9.167-9.339 2.829 2.83-11.996 12.17z" />
                     </svg>
@@ -178,7 +178,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="p-4 hover:bg-gray-50 flex justify-between items-center"
+                <a href="/hizmetler" class="p-4 hover:bg-gray-50 flex justify-between items-center"
                     @click="activeDropdown === 1 ? activeDropdown = null : activeDropdown = 1">
                     <span>Hizmetler</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current" viewBox="0 0 24 24">

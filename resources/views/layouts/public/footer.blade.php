@@ -1,7 +1,8 @@
 <footer class="bg-slate-800 py-12 px-8 font-sans tracking-wide ">
     <div class="max-w-7xl mx-auto">
         <div class="grid max-sm:grid-cols-1 lg:grid-cols-3 items-center gap-8">
-            <h2 class="lg:col-span-2 text-xl font-semibold text-gray-300">Bültenimize katılın, bizden haberdar olun!<br /> E-posta adresinizi girin Abone Ol</h2>
+            <h2 class="lg:col-span-2 text-xl font-semibold text-gray-300">Bültenimize katılın, bizden haberdar
+                olun!<br /> E-posta adresinizi girin Abone Ol</h2>
             <div class="bg-transparent border border-gray-400  flex px-1 py-1 rounded-full">
                 <input type='email' placeholder='Email Adresiniz'
                     class="w-full outline-none bg-transparent pl-4 text-sm text-gray-300" />
@@ -16,7 +17,8 @@
 
         <div class="grid max-sm:grid-cols-1 max-lg:grid-cols-2 lg:grid-cols-5 lg:gap-20 max-lg:gap-8">
             <div class="lg:col-span-3 max-lg:col-span-full">
-                <a href='javascript:void(0)'><img src="{{ asset('assets/images/logoipsum-317.svg') }}" alt="lorem hukuk logo"></a>
+                <a href='javascript:void(0)'><img src="{{ asset('assets/images/logoipsum-317.svg') }}"
+                        alt="lorem hukuk logo"></a>
                 <p class="text-gray-300 text-sm lg:max-w-sm mt-6">Lorem ipsum dolor sit amet, consectetur adipiscing
                     elit. Aenean gravida,
                     mi eu pulvinar cursus, sem elit interdum mauris.</p>
@@ -49,7 +51,16 @@
                 </ul>
             </div>
         </div>
-
-        <p class='text-sm text-gray-300 mt-8'>© ReadymadeUI. All rights reserved.</p>
+        <div class="flex items-center justify-between mt-8">
+            <p class='text-sm text-gray-300 '>© ReadymadeUI. All rights reserved.</p>
+            <div class="">
+                <a href='javascript:void(0)' class="text-gray-300 hover:text-gray-200 text-2xl mr-2"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href='javascript:void(0)' class="text-gray-300 hover:text-gray-200 text-2xl mr-2"><i
+                        class="fa-brands fa-x-twitter"></i></a>
+                <a href='javascript:void(0)' class="text-gray-300 hover:text-gray-200 text-2xl"><i
+                        class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
     </div>
 </footer>

@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\Public\PublicController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('public.home');
-});
+Route::get('/',[PublicController::class,"home"]);
+Route::get('/hizmetler',[PublicController::class,"services"]);

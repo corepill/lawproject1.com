@@ -45,12 +45,12 @@
     <div
         class="grid md:grid-cols-2 items-center md:gap-8 gap-6 font-[sans-serif] max-w-7xl max-md:max-w-md mx-auto py-24 px-4">
         <div class="max-md:order-1 max-md:text-center">
-            <h2 class="md:text-4xl text-3xl md:leading-10 font-medium text-gray-800 mb-4">En yüksek dürüstlük standartlarını
-                koruyoruz.</h2>
-            <p class="mt-4 text-base text-gray-600 leading-relaxed">Her vakanın benzersiz olduğunu anlayarak
+            <x-title heading="En yüksek dürüstlük standartlarını
+                koruyoruz."
+                subtext="Her vakanın benzersiz olduğunu anlayarak
                 müşterilerimizin ihtiyaçlarına öncelik veriyoruz. Deneyimli avukatlardan oluşan ekibimiz, hak ettiğiniz
                 ilgiyi ve temsili almanızı sağlayarak size özel çözümler sunmayı taahhüt eder. Kapsamlı uzmanlığımız, çok
-                çeşitli yasal konuları etkin bir şekilde ele almamızı sağlar.</p>
+                çeşitli yasal konuları etkin bir şekilde ele almamızı sağlar." />
             <div class="mt-8 flex items-center gap-4 justify-center md:justify-start">
                 <a href=""
                     class="border border-slate-800 bg-slate-800 text-white hover:bg-white hover:text-black duration-300 py-2 px-7 rounded-3xl">Daha
@@ -67,11 +67,8 @@
     </div>
     <div class="bg-[#DDEBF9]">
         <div class="max-w-7xl mx-auto py-20 px-4 lg:px-0">
-            <div>
-                <h2 class="md:text-4xl text-3xl md:leading-10 font-medium text-gray-800 mb-4">Sıkca Sorulan Sorular</h2>
-                <p class="text-gray-600 mt-6">Her vakanın benzersiz olduğunu anlayarak müşterilerimizin
-                    ihtiyaçlarına öncelik veriyoruz.</p>
-            </div>
+            <x-title heading="Sıkca Sorulan Sorular"
+                subtext="Her vakanın benzersiz olduğunu anlayarak müşterilerimizin ihtiyaçlarına öncelik veriyoruz." />
             <div x-data="{
                 selected: null,
                 items: [
@@ -127,63 +124,9 @@
             </div>
         </div>
     </div>
-
-    <div class="bg-white font-[sans-serif] p-4">
-        <div class="max-w-7xl mx-auto">
-            <div>
-                <h2 class="md:text-4xl text-3xl md:leading-10 font-medium text-gray-800 mb-4">Hizmetlerimiz</h2>
-                <p class="text-gray-600 mt-6">Her vakanın benzersiz olduğunu anlayarak müşterilerimizin
-                    ihtiyaçlarına öncelik veriyoruz.</p>
-            </div>
-            <div
-                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-12 max-lg:max-w-3xl max-md:max-w-md mx-auto">
-                <div
-                    class="bg-white cursor-pointer rounded-lg overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-60">
-                    <img src="https://images.pexels.com/photos/1456951/pexels-photo-1456951.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Blog Post 1"
-                        class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
-                    <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
-                        <h3 class="text-xl font-bold text-white">Aile Hukuku</h3>
-                        <div class="mt-4">
-                            <p class="text-gray-200 text-sm ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                                accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
-                        </div>
-                        <span class="text-sm block mt-2 text-yellow-400 font-semibold border-b-2 max-w-max">Daha
-                            Fazla</span>
-                    </div>
-                </div>
-                <div
-                    class="bg-white cursor-pointer rounded-lg overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-60">
-                    <img src="https://images.pexels.com/photos/5716053/pexels-photo-5716053.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Blog Post 1"
-                        class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
-                    <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
-                        <h3 class="text-xl font-bold text-white">Ticaret Hukuku</h3>
-                        <div class="mt-4">
-                            <p class="text-gray-200 text-sm ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                                accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
-                        </div>
-                        <span class="text-sm block mt-2 text-yellow-400 font-semibold border-b-2 max-w-max">Daha
-                            Fazla</span>
-                    </div>
-                </div>
-                <div
-                    class="bg-white cursor-pointer rounded-lg overflow-hidden group relative before:absolute before:inset-0 before:z-10 before:bg-black before:opacity-60">
-                    <img src="https://images.pexels.com/photos/8927687/pexels-photo-8927687.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                        alt="Blog Post 1"
-                        class="w-full h-96 object-cover group-hover:scale-110 transition-all duration-300" />
-                    <div class="p-6 absolute bottom-0 left-0 right-0 z-20">
-                        <h3 class="text-xl font-bold text-white">Vergi Hukuku</h3>
-                        <div class="mt-4">
-                            <p class="text-gray-200 text-sm ">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                                accumsan, nunc et tempus blandit, metus mi consectetur felis turpis vitae ligula.</p>
-                        </div>
-                        <span class="text-sm block mt-2 text-yellow-400 font-semibold border-b-2 max-w-max">Daha
-                            Fazla</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="max-w-7xl mx-auto my-20">
+        <x-title heading="Hizmetlerimiz" subtext="Davalarınız için iletişime geçinmekten çekinmeyin." />
+        @include('components.services')
     </div>
     <div class="font-sans  py-12">
         <div class="max-w-7xl max-md:max-w-md mx-auto">
@@ -326,80 +269,5 @@
             </template>
         </div>
     </div>
-    <div class="max-w-7xl mx-auto p-5">
-        <div class="grid grid-cols-1 md:grid-cols-12 border bg-slate-300">
-            <div class="md:col-span-4">
-                <img class="w-full h-full object-cover"
-                    src="https://images.pexels.com/photos/4491469/pexels-photo-4491469.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="">
-            </div>
-            <form action="" method="post" class="md:col-span-8 p-10">
-                <div class="mb-5">
-                    <h2 class="md:text-4xl text-3xl md:leading-10 font-medium text-gray-800 mb-4">İletişime Geçin</h2>
-                    <p class="text-gray-600 mt-6">Davalarınız için iletişime geçinmekten çekinmeyin.</p>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-full-name">
-                            Ad Soyad
-                        </label>
-                        <input
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-full-name" type="text" name="full-name">
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
-                            Email
-                        </label>
-                        <input
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-email" type="email" name="email">
-                    </div>
-                </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-phone">
-                            Telefon No
-                        </label>
-                        <input
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-phone" type="text" name="phone">
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-service-type">
-                            Hizmet Tipi
-                        </label>
-                        <select
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-service-type" name="service-type">
-                            <option value="ticari-davalar">Ticari Davalar</option>
-                            <option value="ceza-davaları">Ceza Davaları</option>
-                            <option value="aile-hukuku">Aile Hukuku</option>
-                            <option value="iş-hukuku">İş Hukuku</option>
-                            <option value="idari-hukuk">İdari Hukuk</option>
-                            <option value="gayrimenkul-hukuku">Gayrimenkul Hukuku</option>
-                            <option value="gayrimenkul-hukuku">Diğer</option>
-                        </select>
-                    </div>
-                </div>
-            
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-message">
-                            Mesajınız
-                        </label>
-                        <textarea rows="10"
-                            class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                            id="grid-message" name="message"></textarea>
-                    </div>
-                    <div class="flex justify-between w-full px-3">
-                        <button type="submit"
-                            class="mt-6 border border-slate-800 bg-slate-800 text-white hover:bg-white hover:text-black duration-300 py-2 px-7 rounded-3xl">
-                            Gönder
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    @include('components.contact')
 @endsection
