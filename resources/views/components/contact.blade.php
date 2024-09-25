@@ -1,4 +1,4 @@
-<div class="max-w-7xl mx-auto p-5">
+<div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-12 border bg-slate-300">
         <div class="md:col-span-4">
             <img class="w-full h-full object-cover"
@@ -18,8 +18,7 @@
                         id="grid-full-name" type="text" name="full-name">
                 </div>
                 <div class="w-full md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-email">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
                         Email
                     </label>
                     <input
@@ -29,8 +28,7 @@
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-phone">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-phone">
                         Telefon No
                     </label>
                     <input

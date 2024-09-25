@@ -1,0 +1,2 @@
+blog,hizmet detay sayfaları yapılacak.
+-konum harita olarak eklenecek.

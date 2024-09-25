@@ -2,7 +2,7 @@
     window.addEventListener('scroll', () => {
         isScrolled = window.scrollY > 50;
     });
-}" class="fixed w-full z-50 top-0 left-0 transition-colors duration-300">
+}" class="fixed w-full z-[60] top-0 left-0 transition-colors duration-300">
     <!-- Desktop Menu -->
     <nav :class="{ 'bg-white': isScrolled, 'text-black': isScrolled, 'text-white': !isScrolled }"
         class="hidden lg:flex px-16 items-center justify-between relative py-5">
@@ -73,7 +73,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#" class="flex md:inline-flex p-4 items-center hover:text-gray-300">
+                <a href="/bloglar" class="flex md:inline-flex p-4 items-center hover:text-gray-300">
                     <span>Blog</span>
                 </a>
             </li>
@@ -88,12 +88,12 @@
                 <ul
                     class="child transition duration-700 md:absolute top-full right-0 md:w-52 bg-white md:shadow-lg md:rounded-b text-black list-none">
                     <li>
-                        <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
+                        <a href="/hakkimizda" class="flex px-4 py-3 hover:bg-gray-50">
                             Hakkımızda
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
+                        <a href="/ekibimiz" class="flex px-4 py-3 hover:bg-gray-50">
                             Ekibimiz
                         </a>
                     </li>
@@ -110,7 +110,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#" class="flex md:inline-flex p-4 items-center hover:text-gray-300">
+                <a href="/iletisim" class="flex md:inline-flex p-4 items-center hover:text-gray-300">
                     <span> İletişim</span>
                 </a>
             </li>
@@ -268,7 +268,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="block pl-8 py-3 hover:bg-gray-50">
+                        <a href="/ekibimiz" class="block pl-8 py-3 hover:bg-gray-50">
                             Ekibimiz
                         </a>
                     </li>
