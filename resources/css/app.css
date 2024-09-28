@@ -27,7 +27,11 @@
         @apply text-sm;
         @apply font-semibold;
     }
-  }
+}
+
+.custom-space > *:not(:last-child) {
+    @apply mb-16; /* Alt boşluk ekleyin */
+}
 
 @layer base {
     ul,

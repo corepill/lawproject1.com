@@ -3,7 +3,7 @@
     Lorem Anasayfa
 @endsection
 @section('content')
-    <div class="space-y-16">
+    <div class="custom-space">
         <div class="relative min-h-[100vh] bg-no-repeat bg-cover pt-44 flex flex-col justify-center items-center overflow-hidden"
             style="background-image: linear-gradient(rgba(0, 0, 0, 0.767), rgba(0, 0, 0, 0.507)), url('{{ asset('assets/images/hukuk1.webp') }}'); background-position: center;">
             <div class="max-w-7xl justify-center items-center md:items-start text-white flex flex-col gap-20 px-4 lg:px-0">
@@ -30,8 +30,8 @@
                             <span class="text-gray-300 text-sm md:text-base">Yıllık Tecrübe</span>
                         </div>
                         <div class="flex flex-col gap-2 items-center justify-center w-1/2 md:w-auto">
-                            <span class="text-4xl md:text-5xl font-semibold">84k</span>
-                            <span class="text-gray-300 text-sm md:text-base">Mutlu Müşteri</span>
+                            <span class="text-4xl md:text-5xl font-semibold">1000+</span>
+                            <span class="text-gray-300 text-sm md:text-base">Mutlu Müvekkil</span>
                         </div>
                         <div class="flex flex-col gap-2 items-center justify-center w-1/2 md:w-auto">
                             <span class="text-4xl md:text-5xl font-semibold">98%</span>

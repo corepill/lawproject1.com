@@ -1,4 +1,21 @@
-<footer class="bg-slate-800 py-12 px-8 font-sans tracking-wide mt-16">
+<footer class="bg-slate-800 py-12 px-8 font-sans tracking-wide mt-44">
+    <div
+        class=" mx-auto -mt-44 mb-16 md:max-w-7xl bg-gray-300 rounded-lg overflow-hidden p-10 flex items-end justify-start relative">
+        <iframe width="100%" height="100%" class="absolute inset-0" frameborder="0" title="map" marginheight="0"
+            marginwidth="0" scrolling="no"
+            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C7%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=124&amp;iwloc=B&amp;output=embed"
+            style="filter: grayscale(1) contrast(1.2) opacity(0.4);"></iframe>
+        <div class="bg-white lg:w-1/2 relative flex flex-wrap py-6 rounded shadow-md">
+            <div class="px-6">
+                <h2 class="title-font font-semibold text-gray-900 tracking-widest text-xs">ADDRESS</h2>
+                <p class="mt-1">İnönü Caddesi No:45, Beşiktaş, İstanbul, Türkiye</p>
+                <h2 class="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">EMAIL</h2>
+                <a class="text-indigo-500 leading-relaxed">example@email.com</a>
+                <h2 class="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
+                <p class="leading-relaxed">123-456-7890</p>
+            </div>
+        </div>
+    </div>
     <div class="max-w-7xl mx-auto">
         <div class="grid max-sm:grid-cols-1 lg:grid-cols-3 items-center gap-8">
             <h2 class="lg:col-span-2 text-xl font-semibold text-gray-300">Bültenimize katılın, bizden haberdar

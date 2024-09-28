@@ -98,7 +98,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
+                        <a href="/kariyer" class="flex px-4 py-3 hover:bg-gray-50">
                             Kariyer
                         </a>
                     </li>
