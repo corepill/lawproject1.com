@@ -12,4 +12,6 @@ Route::get('/hakkimizda',[PublicController::class,"about"]);
 Route::get('/ekibimiz',[PublicController::class,"team"]);
 Route::get('/kariyer',[PublicController::class,"career"]);
 Route::get('/kariyer/{slug}',[PublicController::class,"careerDetail"]);
+Route::get('/duyurular',[PublicController::class,"announcements"]);
+Route::get('/duyurular/{slug}',[PublicController::class,"announcementDetail"]);
 Route::get('/iletisim',[PublicController::class,"contact"]);

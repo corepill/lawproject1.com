@@ -1,17 +1,9 @@
 @extends('layouts.public.public')
 @section('title')
-    Ekibimiz
+    Bloglar
 @endsection
 @section('content')
-    <div class="w-full max-h-[20rem] min-h-[24rem] bg-red-600 flex items-center justify-center bg-no-repeat bg-cover flex-col text-white gap-4"
-        style="background-image: linear-gradient(rgba(0, 0, 0, 0.767), rgba(0, 0, 0, 0.507)), url('{{ asset('assets/images/' . 'hukuk1.webp') }}'); background-position: center;">
-        <div class="flex gap-5 items-center">
-            <p class="bg-slate-300 py-2 px-5 text-black rounded-3xl">Emlak</p>
-            <p>May 18, 2022</p>
-        </div>
-        <h2 class="md:text-5xl text-4xl md:leading-10 font-medium">Emlak planlamasının önemi</h2>
-    </div>
-
+    <x-pageHero title="Araç Kanunu" imagetitle="iletisim.webp" />
     <div class="mt-20 max-w-7xl mx-auto">
         <h1>Safeguarding Your Legacy</h1>
 

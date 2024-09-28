@@ -39,6 +39,14 @@ class PublicController extends Controller
     public function team(){
         return view('public.team');
     }
+
+    public function announcements(){
+        return view('public.announcements');
+    }
+
+    public function announcementDetail(){
+        return view('public.announcementDetail');
+    }
     public function contact(){
         return view('public.contact');
     }
