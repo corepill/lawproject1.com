@@ -26,11 +26,11 @@
             selected: null,
             items: [{
                     id: 1,
-                    title: 'Portföy',
+                    title: 'Hizmetler',
                     icon: 'fa-handshake',
                     links: [
-                        { title: 'Portföy Oluştur', href: '/admin/portfoy-olustur' },
-                        { title: 'Portföy Listesi', href: '/admin/portfoy' }
+                        { title: 'Hizmet Oluştur', href: '/admin/portfoy-olustur' },
+                        { title: 'Hizmet Listesi', href: '/admin/portfoy' }
                     ]
                 },
                 {
@@ -40,6 +40,15 @@
                     links: [
                         { title: 'Blog Oluştur', href: '/admin/blog-olustur' },
                         { title: 'Blog Listesi', href: '/admin/blog' }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'Duyurular',
+                    icon: 'fa-book-bookmark',
+                    links: [
+                        { title: 'Duyuru Oluştur', href: '/admin/duyuru-olustur' },
+                        { title: 'Duyuru Listesi', href: '/admin/duyuru' }
                     ]
                 }
             ]
@@ -80,6 +89,18 @@
             <a href="/admin/kategoriler" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
                 <i class="fa-solid fa-layer-group"></i>
                 <span class="mx-4 font-medium">Kategoriler</span>
+            </a>
+            <a href="/admin/ekip" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
+                <i class="fa-solid fa-layer-group"></i>
+                <span class="mx-4 font-medium">Ekip</span>
+            </a>
+            <a href="/admin/kariyer" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
+                <i class="fa-solid fa-layer-group"></i>
+                <span class="mx-4 font-medium">Kariyer</span>
+            </a>
+            <a href="/admin/istekler" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
+                <i class="fa-solid fa-layer-group"></i>
+                <span class="mx-4 font-medium">İstekler</span>
             </a>
             <a href="/admin/ayarlar" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
                 <i class="fa-solid fa-gear"></i>
