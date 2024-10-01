@@ -23,35 +23,35 @@
                 </thead>
 
                 <tbody class="whitespace-nowrap">
-                    {{-- @foreach ($articles as $article)
-                        <tr class="hover:bg-gray-50" data-id="{{ $article->id }}">
-                            <td class="p-4 text-[15px] text-gray-800">{{ $article->title }}</td>
+                    @foreach ($announcements as $announcement)
+                        <tr class="hover:bg-gray-50" data-id="{{ $announcement->id }}">
+                            <td class="p-4 text-[15px] text-gray-800">{{ $announcement->title }}</td>
                             <td class="p-4 text-[15px] text-gray-800">
                                 <a href="javascript:void(0)"
                                     :class="{
-                                        'bg-green-500': {{ $article->status }},
-                                        'bg-red-500': !{{ $article->status }}
+                                        'bg-green-500': {{ $announcement->status }},
+                                        'bg-red-500': !{{ $announcement->status }}
                                     }"
                                     class="py-2 px-4 rounded"
-                                    @click="changeStatus({{ $article->id }}, {{ $article->status }})">
-                                    {{ $article->status ? 'Aktif' : 'Pasif' }}
+                                    @click="changeStatus({{ $announcement->id }}, {{ $announcement->status }})">
+                                    {{ $announcement->status ? 'Aktif' : 'Pasif' }}
                                 </a>
                             </td>
-                            <td class="p-4 text-[15px] text-gray-800">{{ $article->view_count }}</td>
+                            <td class="p-4 text-[15px] text-gray-800">{{ $announcement->view_count }}</td>
                             <td class="p-4 text-[15px] text-gray-800">
-                                {{ \Carbon\Carbon::parse($article->created_at)->format('d-m-Y') }}</td>
+                                {{ \Carbon\Carbon::parse($announcement->created_at)->format('d-m-Y') }}</td>
                             <td class="p-4">
                                 <a class="mr-4" title="Edit"
-                                    href="{{ route('article.edit', ['id' => $article->id]) }}">
+                                    href="{{ route('announcements.edit', $announcement->slug) }}">
                                     <i class="fa-regular fa-pen-to-square text-blue-500"></i>
                                 </a>
                                 <a class="mr-4 btnDelete" href="javascript:void(0)"
-                                    @click="confirmDelete({{ $article->id }})">
+                                    @click="confirmDelete({{ $announcement->id }})">
                                     <i class="fa-solid fa-trash-can text-red-500"></i>
                                 </a>
                             </td>
                         </tr>
-                    @endforeach --}}
+                    @endforeach
                 </tbody>
             </table>
         </div>

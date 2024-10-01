@@ -23,6 +23,7 @@
 
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/summernote/summernote-lite.min.js') }}"></script>
+    @include('sweetalert::alert')
     <script>
         $(document).ready(function() {
             $.ajaxSetup({

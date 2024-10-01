@@ -21,7 +21,12 @@ Route::get('/iletisim', [PublicController::class, "contact"]);
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, "dashboard"]);
 
-    
+
     Route::get('/duyurular', [AnnouncementController::class, 'index'])->name('announcements.index');
-    Route::get('/duyurular-olustur', [AnnouncementController::class, 'create'])->name('announcements.create');
+    Route::get('/duyuru-olustur', [AnnouncementController::class, 'create'])->name('announcements.create');
+    Route::post('/duyuru-olustur', [AnnouncementController::class, 'store']);
+    Route::get("/duyuru-guncelle/{slug}", [AnnouncementController::class, "edit"])
+        ->name("announcements.edit");
+
+    Route::post("/duyuru-guncelle/{slug}", [AnnouncementController::class, "update"]);
 });
