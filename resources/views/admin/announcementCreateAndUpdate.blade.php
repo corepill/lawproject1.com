@@ -11,7 +11,8 @@
             <div class="text-red-500 mb-5">{{ $error }}</div>
         @endforeach
     @endif
-    <form method="POST" enctype="multipart/form-data" class="space-y-5" action="{{ isset($announcement) ? route('announcements.edit',$announcement->slug ) : route('announcements.create') }}">
+    <form method="POST" enctype="multipart/form-data" class="space-y-5"
+        action="{{ isset($announcement) ? route('announcements.edit', $announcement->slug) : route('announcements.create') }}">
         @csrf
         <x-input-field type="text" for="title" title="Başlık" :item="$announcement->title ?? null" />
 
@@ -41,3 +42,4 @@
         });
     </script>
 @endsection
+

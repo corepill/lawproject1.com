@@ -6,6 +6,7 @@ use App\Http\Requests\AnnouncementRequest;
 use App\Models\Announcement;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class AnnouncementController extends Controller
 {
@@ -61,6 +62,22 @@ class AnnouncementController extends Controller
             return redirect('admin/duyurular');
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['Hata' => 'Beklenmeyen bir hata oluştu: ' . $e->getMessage()]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            // Makaleyi bul
+            $announcement = Announcement::find($id);
+            if (!$announcement) {
+                return Response::json(['status' => 'error', 'message' => 'Duyuru bulunamadı!'], 404);
+            }
+
+            $announcement->delete();
+            return Response::json(['status' => 'success', 'message' => 'Duyuru başarıyla silindi!']);
+        } catch (\Exception $e) {
+            return Response::json(['status' => 'failed', 'message' => 'Duyuru silme işlemi başarısız!']);
         }
     }
 }

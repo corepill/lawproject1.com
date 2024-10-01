@@ -5,7 +5,7 @@
 @section('css')
 @endsection
 @section('content')
-    <div x-data="blog">
+    <div x-data="announcement">
         <div class="flex justify-between items-center mb-5">
             <h2 class="text-3xl">Duyurular</h2>
             <a href="duyuru-olustur" class="bg-orange-600 py-2 px-8 rounded">Yeni</a>
@@ -46,7 +46,7 @@
                                     <i class="fa-regular fa-pen-to-square text-blue-500"></i>
                                 </a>
                                 <a class="mr-4 btnDelete" href="javascript:void(0)"
-                                    @click="confirmDelete({{ $announcement->id }})">
+                                    @click="confirmDelete({{ $announcement->id }}, '{{ url('admin/duyuru-sil') }}')">
                                     <i class="fa-solid fa-trash-can text-red-500"></i>
                                 </a>
                             </td>
@@ -56,4 +56,8 @@
             </table>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('assets/js/common.js') }}"></script>
 @endsection

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\Public\PublicController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PublicController::class, "home"]);
@@ -27,6 +28,9 @@ Route::prefix('admin')->group(function () {
     Route::post('/duyuru-olustur', [AnnouncementController::class, 'store']);
     Route::get("/duyuru-guncelle/{slug}", [AnnouncementController::class, "edit"])
         ->name("announcements.edit");
-
     Route::post("/duyuru-guncelle/{slug}", [AnnouncementController::class, "update"]);
+    Route::delete('/duyuru-sil/{id}', [AnnouncementController::class, 'destroy'])->name('announcements.delete');
+
+    Route::get('/ekip', [TeamController::class, 'index'])->name('team.index');
+    Route::post('/ekip-olustur', [TeamController::class, 'store'])->name('team.create');
 });
