@@ -108,21 +108,65 @@
                 <div class="min-h-screen flex items-center justify-center">
                     <div class="bg-white p-6 rounded-lg shadow-lg min-w-[80%] md:min-w-[40%]">
                         <h2 class="text-xl mb-4">Yeni Üye Ekle</h2>
-                        <form id="memberForm" method="POST">
+                        <form id="teamForm" @submit.prevent="submitTeamForm" action="{{ route('team.create') }}"
+                            method="POST">
                             @csrf
-                            <div class="mb-4">
-                                <label for="memberName" class="block text-sm font-medium text-gray-700">Üye Adı</label>
-                                <input type="text" id="memberName" name="memberName"
-                                    class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
-                                    required>
+                            <div class="mb-4 flex justify-between gap-5">
+                                <div class="w-full">
+                                    <label for="name_surname" class="block text-sm font-medium text-gray-700">Adı
+                                        Soyadı</label>
+                                    <input type="text" id="name_surname" name="name_surname"
+                                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                        required>
+                                </div>
+                                <div class="w-full">
+                                    <label for="x_username" class="block text-sm font-medium text-gray-700">X Kullanıcı
+                                        Adı</label>
+                                    <input type="text" id="x_username" name="x_username"
+                                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                        required>
+                                </div>
                             </div>
-                            <div class="mb-4">
-                                <label for="memberRole" class="block text-sm font-medium text-gray-700">Rol</label>
-                                <select id="memberRole" name="memberRole"
+                            <div class="mb-4 flex justify-between gap-5">
+                                <div class="w-full">
+                                    <label for="instagram_username"
+                                        class="block text-sm font-medium text-gray-700">Instagram
+                                        Kullanıcı Adı</label>
+                                    <input type="text" id="instagram_username" name="instagram_username"
+                                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                        required>
+                                </div>
+                                <div class="w-full">
+                                    <label for="linkedin_username"
+                                        class="block text-sm font-medium text-gray-700">Linkedin
+                                        Kullanıcı Adı</label>
+                                    <input type="text" id="linkedin_username" name="linkedin_username"
+                                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="mb-4 flex justify-between gap-5">
+                                <div class="w-full">
+                                    <label for="role_id" class="block text-sm font-medium text-gray-700">Rol</label>
+                                    <select id="role_id" name="role_id"
+                                        class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
+                                        <template x-for="role in roles" :key="role.id">
+                                            <option :value="role.id" x-text="role.name"></option>
+                                        </template>
+                                    </select>
+                                </div>
+                                <div class="grid w-full gap-1.5">
+                                    <label class="block text-sm font-medium text-gray-700">Görsel</label>
+                                    <input id="photo" type="file"
+                                        class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="status" class="block text-sm font-medium text-gray-700">Durum</label>
+                                <select id="status" name="status"
                                     class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
-                                    <template x-for="role in roles" :key="role.id">
-                                        <option :value="role.id" x-text="role.name"></option>
-                                    </template>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Pasif</option>
                                 </select>
                             </div>
                             <div class="mt-6 flex justify-end text-white">
@@ -154,7 +198,7 @@
                 openMemberModal() {
                     this.openMember = true;
                     this.openRole = false; // Rol modalını kapat
-                    document.getElementById('memberForm').reset();
+                    document.getElementById('teamForm').reset();
                 },
                 closeRoleModal() {
                     this.openRole = false;
@@ -162,7 +206,7 @@
                 },
                 closeMemberModal() {
                     this.openMember = false;
-                    document.getElementById('memberForm').reset(); // Reset the member form on close
+                    document.getElementById('teamForm').reset(); // Reset the member form on close
                 },
                 changeStatus(teamId, currentStatus) {
                     // status değişim kodu
@@ -172,6 +216,27 @@
                 },
                 openEditModal(id, title, status) {
                     // düzenleme modalı açma kodu
+                },
+                async submitTeamForm() {
+                    try {
+                        const form = document.getElementById('teamForm');
+                        const formData = new FormData(form);
+                        const response = await fetch(form.action, {
+                            method: 'POST',
+                            body: formData,
+                        });
+                        const result = await response.json();
+
+                        if (result.status === 'success') {
+                            this.roles = [...this.roles, result.role];
+                            // this.closeRoleModal();
+                        } else {
+                            alert(result.message);
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Beklenmeyen bir hata oluştu.');
+                    }
                 },
                 async submitRoleForm() {
                     try {
@@ -184,9 +249,8 @@
                         const result = await response.json();
 
                         if (result.status === 'success') {
-                            // Mevcut rolleri kopyalayıp yeni rolü ekleyerek listeyi yeniden oluştur
                             this.roles = [...this.roles, result.role];
-                            this.closeRoleModal();
+                            // this.closeRoleModal();
                         } else {
                             alert(result.message);
                         }
