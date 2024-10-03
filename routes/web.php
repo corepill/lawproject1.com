@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\Public\PublicController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,8 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/ekip', [TeamController::class, 'index'])->name('team.index');
     Route::post('/ekip-olustur', [TeamController::class, 'store'])->name('team.create');
+
+
+    Route::post('/rol-olustur',[RoleController::class,"store"])->name('role.create');
+    Route::delete('/rol-sil/{id}', [RoleController::class, 'destroy'])->name('role.delete');
 });

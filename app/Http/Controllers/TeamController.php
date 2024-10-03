@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\Team;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,8 @@ class TeamController extends Controller
 {
    public function index(){
     $teams = Team::all();
-    return view('admin.team', compact('teams'));
+    $roles = Role::all();
+    return view('admin.team', compact('teams', 'roles'));
    }
 
    public function store(Request $request)

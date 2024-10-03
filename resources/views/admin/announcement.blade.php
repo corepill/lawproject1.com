@@ -5,7 +5,7 @@
 @section('css')
 @endsection
 @section('content')
-    <div x-data="announcement">
+    <div x-data="announcement()">
         <div class="flex justify-between items-center mb-5">
             <h2 class="text-3xl">Duyurular</h2>
             <a href="duyuru-olustur" class="bg-orange-600 py-2 px-8 rounded">Yeni</a>
@@ -21,7 +21,6 @@
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Ayarlar</th>
                     </tr>
                 </thead>
-
                 <tbody class="whitespace-nowrap">
                     @foreach ($announcements as $announcement)
                         <tr class="hover:bg-gray-50" data-id="{{ $announcement->id }}">
@@ -60,4 +59,20 @@
 
 @section('js')
     <script src="{{ asset('assets/js/common.js') }}"></script>
+    <script>
+        function announcement() {
+            return {
+                changeStatus(id, status) {},
+                confirmDelete(id, url) {
+                    window.confirmDelete(id, url).then((response) => {
+                        if (response === "success") {
+                            document.querySelector(`tr[data-id="${id}"]`).remove();
+                        }
+                    }).catch((error) => {
+                        console.log("Silme işlemi başarısız veya iptal edildi.", error);
+                    });
+                }
+            };
+        }
+    </script>
 @endsection
