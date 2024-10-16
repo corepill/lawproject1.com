@@ -44,6 +44,7 @@ class RoleController extends Controller
             $role->delete();
             return Response::json([
                 'status' => 'success',
+                'type' => 'role',
                 'message' => 'Rol silindi.'
             ]);
         } catch (\Exception $e) {

@@ -22,7 +22,7 @@ Route::get('/iletisim', [PublicController::class, "contact"]);
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, "dashboard"]);
-
+    Route::post('/{model}/changeStatus', [AdminController::class, 'changeStatus']);
 
     Route::get('/duyurular', [AnnouncementController::class, 'index'])->name('announcements.index');
     Route::get('/duyuru-olustur', [AnnouncementController::class, 'create'])->name('announcements.create');
@@ -34,8 +34,9 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/ekip', [TeamController::class, 'index'])->name('team.index');
     Route::post('/ekip-olustur', [TeamController::class, 'store'])->name('team.create');
+    Route::post('/ekip-guncelle/{id}', [TeamController::class, 'update'])->name('team.update');
+    Route::delete('/ekip-sil/{id}', [TeamController::class, 'destroy'])->name('team.delete');
 
-
-    Route::post('/rol-olustur',[RoleController::class,"store"])->name('role.create');
+    Route::post('/rol-olustur', [RoleController::class, "store"])->name('role.create');
     Route::delete('/rol-sil/{id}', [RoleController::class, 'destroy'])->name('role.delete');
 });

@@ -48,7 +48,7 @@
                     icon: 'fa-book-bookmark',
                     links: [
                         { title: 'Duyuru Oluştur', href: '/admin/duyuru-olustur' },
-                        { title: 'Duyuru Listesi', href: '/admin/duyuru' }
+                        { title: 'Duyuru Listesi', href: '/admin/duyurular' }
                     ]
                 }
             ]

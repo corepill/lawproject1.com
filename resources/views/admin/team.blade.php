@@ -13,7 +13,7 @@
             <h2 class="text-3xl">Ekip</h2>
             <div>
                 <button class="bg-orange-600 py-2 px-8 rounded" @click="openRoleModal()">Yeni Rol</button>
-                <button class="bg-orange-600 py-2 px-8 rounded" @click="openMemberModal()">Yeni Üye</button>
+                <button class="bg-orange-600 py-2 px-8 rounded" @click="openTeamModal()">Yeni Üye</button>
             </div>
         </div>
         <div class="overflow-x-auto">
@@ -29,36 +29,37 @@
                     </tr>
                 </thead>
                 <tbody class="whitespace-nowrap">
-                    @foreach ($teams as $team)
-                        <tr class="hover:bg-gray-50" data-id="{{ $team->id }}">
-                            <td class="p-4 text-[15px] text-gray-800">{{ $team->title }}</td>
+                    <template x-for="team in teams" :key="team.id">
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-4 text-[15px] text-gray-800" x-text="team.name_surname"></td>
+                            <td class="p-4 text-[15px] text-gray-800" x-text="team.role.name"></td>
                             <td class="p-4 text-[15px] text-gray-800">
-                                <a href="javascript:void(0)"
-                                    :class="{ 'bg-green-500': {{ $team->status }}, 'bg-red-500': !{{ $team->status }} }"
+                                <img :src="team.photo ? '/' + team.photo :
+                                    '{{ asset('assets/images/default-photo.jpg') }}'"
+                                    :alt="team.name_surname" class="h-10 w-10 rounded-full object-cover">
+                            </td>
+
+                            <td class="p-4 text-[15px] text-gray-800">
+                                <a href="javascript:void(0)" :class="team.status ? 'bg-green-500' : 'bg-red-500'"
                                     class="py-2 px-4 rounded"
-                                    @click="changeStatus({{ $team->id }}, {{ $team->status }})">
-                                    {{ $team->status ? 'Aktif' : 'Pasif' }}
+                                    @click="changeStatus(team.status, team.id, 'Team' ,'{{ url('admin/ekip/changeStatus') }}')">
+                                    <span x-text="team.status ? 'Aktif' : 'Pasif'"></span>
                                 </a>
                             </td>
-                            <td class="p-4 text-[15px] text-gray-800">
-                                <img src="{{ $team->photo ? asset($team->photo) : asset('default-photo.jpg') }}"
-                                    alt="{{ $team->title }}" class="h-10 w-10 rounded-full">
-
+                            <td class="p-4 text-[15px] text-gray-800"
+                                x-text="new Date(team.created_at).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' })">
                             </td>
-                            <td class="p-4 text-[15px] text-gray-800">
-                                {{ \Carbon\Carbon::parse($team->created_at)->format('d-m-Y') }}</td>
                             <td class="p-4">
-                                <a class="mr-4" title="Edit" href="javascript:void(0)"
-                                    @click="openEditModal({{ $team->id }}, '{{ $team->title }}', {{ $team->status }})">
+                                <a class="mr-4" title="Edit" href="javascript:void(0)" @click="openEditTeamModal()">
                                     <i class="fa-regular fa-pen-to-square text-blue-500"></i>
                                 </a>
                                 <a class="mr-4 btnDelete" href="javascript:void(0)"
-                                    @click="confirmDelete({{ $team->id }})">
+                                    @click="confirmDelete(team.id, '{{ url('admin/ekip-sil') }}')">
                                     <i class="fa-solid fa-trash-can text-red-500"></i>
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                    </template>
                 </tbody>
             </table>
             <!-- Modal for adding role -->
@@ -104,12 +105,12 @@
             </div>
 
             <!-- Modal for adding member -->
-            <div x-show="openMember" x-transition class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-40">
+            <div x-show="openTeam" x-transition class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-40">
                 <div class="min-h-screen flex items-center justify-center">
                     <div class="bg-white p-6 rounded-lg shadow-lg min-w-[80%] md:min-w-[40%]">
                         <h2 class="text-xl mb-4">Yeni Üye Ekle</h2>
                         <form id="teamForm" @submit.prevent="submitTeamForm" action="{{ route('team.create') }}"
-                            method="POST">
+                            method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4 flex justify-between gap-5">
                                 <div class="w-full">
@@ -157,7 +158,7 @@
                                 </div>
                                 <div class="grid w-full gap-1.5">
                                     <label class="block text-sm font-medium text-gray-700">Görsel</label>
-                                    <input id="photo" type="file"
+                                    <input id="photo" type="file" name="photo"
                                         class="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium">
                                 </div>
                             </div>
@@ -189,33 +190,44 @@
             Alpine.data('modal', () => ({
                 openRole: false,
                 roles: @json($roles),
-                openMember: false,
+                teams: @json($teams),
+                openTeam: false,
                 openRoleModal() {
                     this.openRole = true;
-                    this.openMember = false; // Üye modalını kapat
+                    this.openTeam = false;
                     document.getElementById('roleForm').reset();
                 },
-                openMemberModal() {
-                    this.openMember = true;
-                    this.openRole = false; // Rol modalını kapat
+                openTeamModal() {
+                    this.openTeam = true;
+                    this.openRole = false;
                     document.getElementById('teamForm').reset();
+                },
+                openEditTeamModal() {
+                    // düzenleme modalı açma kodu
                 },
                 closeRoleModal() {
                     this.openRole = false;
                     document.getElementById('roleForm').reset(); // Reset the role form on close
                 },
                 closeMemberModal() {
-                    this.openMember = false;
+                    this.openTeam = false;
                     document.getElementById('teamForm').reset(); // Reset the member form on close
                 },
-                changeStatus(teamId, currentStatus) {
-                    // status değişim kodu
-                },
-                confirmDelete(teamId) {
-                    // silme onay kodu
-                },
-                openEditModal(id, title, status) {
-                    // düzenleme modalı açma kodu
+                changeStatus(currentStatus, dataId, type, url) {
+                    currentStatus = currentStatus ? 1 : 0;
+                    window.confirmStatusChange(currentStatus, dataId, type, url)
+                        .then((response) => {
+                            if (response === 'success') {
+                                const teamIndex = this.teams.findIndex(team => team.id === dataId);
+                                if (teamIndex !== -1) {
+                                    this.teams[teamIndex].status = !
+                                        currentStatus;
+                                }
+                            }
+                        })
+                        .catch((error) => {
+                            console.log("Durum değişikliği başarısız veya iptal edildi.", error);
+                        })
                 },
                 async submitTeamForm() {
                     try {
@@ -228,8 +240,9 @@
                         const result = await response.json();
 
                         if (result.status === 'success') {
-                            this.roles = [...this.roles, result.role];
-                            // this.closeRoleModal();
+
+                            this.teams = [...this.teams, result.team];
+                            form.reset();
                         } else {
                             alert(result.message);
                         }
@@ -250,7 +263,7 @@
 
                         if (result.status === 'success') {
                             this.roles = [...this.roles, result.role];
-                            // this.closeRoleModal();
+                            form.reset();
                         } else {
                             alert(result.message);
                         }
@@ -262,7 +275,11 @@
                 confirmDelete(id, url) {
                     window.confirmDelete(id, url).then((response) => {
                         if (response === "success") {
-                            this.roles = this.roles.filter(role => role.id !== id);
+                            if (response.type === "role") {
+                                this.roles = this.roles.filter(role => role.id !== id);
+                            } else {
+                                this.teams = this.teams.filter(team => team.id !== id);
+                            }
                         }
                     }).catch((error) => {
                         console.log("Silme işlemi başarısız veya iptal edildi.", error);

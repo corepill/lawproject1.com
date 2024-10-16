@@ -28,7 +28,7 @@ class TeamRequest extends FormRequest
             'linkedin_username' => 'nullable|string|max:50',
             'role_id' => 'required|exists:roles,id',
             'status' => 'required|boolean',
-            'photo' => 'nullable|image|mimes:jpeg,jpg,png|max:2048',
+            'photo' => 'nullable|image|mimes:jpeg,jpg,png,webp',
         ];
     }
 
