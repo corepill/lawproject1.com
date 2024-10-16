@@ -63,10 +63,12 @@ class TeamController extends Controller
             }
             $team->update($data);
 
-            alert()->success('Başarılı', "Takım güncelleme işlemi başarılı!")->showConfirmButton('Tamam')->autoClose(5000);
+            // Güncellenmiş takım bilgileriyle birlikte rol bilgilerini çek
+            $teamWithRole = Team::with('role')->find($team->id);
+
             return Response::json([
                 'status' => 'success',
-                'team' => [$team],
+                'team' => [$teamWithRole], // Güncellenmiş takım ile rolü döndür
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(['Hata' => 'Beklenmeyen bir hata oluştu: ' . $e->getMessage()]);

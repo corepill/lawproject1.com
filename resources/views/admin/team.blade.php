@@ -50,7 +50,7 @@
                                 x-text="new Date(team.created_at).toLocaleDateString('tr-TR', { day: '2-digit', month: '2-digit', year: 'numeric' })">
                             </td>
                             <td class="p-4">
-                                <a class="mr-4" title="Edit" href="javascript:void(0)" @click="openEditTeamModal()">
+                                <a class="mr-4" title="Edit" href="javascript:void(0)" @click="openEditTeamModal(team)">
                                     <i class="fa-regular fa-pen-to-square text-blue-500"></i>
                                 </a>
                                 <a class="mr-4 btnDelete" href="javascript:void(0)"
@@ -108,9 +108,9 @@
             <div x-show="openTeam" x-transition class="fixed z-10 inset-0 overflow-y-auto bg-black bg-opacity-40">
                 <div class="min-h-screen flex items-center justify-center">
                     <div class="bg-white p-6 rounded-lg shadow-lg min-w-[80%] md:min-w-[40%]">
-                        <h2 class="text-xl mb-4">Yeni Üye Ekle</h2>
-                        <form id="teamForm" @submit.prevent="submitTeamForm" action="{{ route('team.create') }}"
-                            method="POST" enctype="multipart/form-data">
+                        <h2 class="text-xl mb-4" x-text="isEditMode ? 'Üye Bilgilerini Güncelle' : 'Yeni Üye Ekle'"></h2>
+                        <form id="teamForm" @submit.prevent="submitTeamForm" action="" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             <div class="mb-4 flex justify-between gap-5">
                                 <div class="w-full">
@@ -173,7 +173,8 @@
                             <div class="mt-6 flex justify-end text-white">
                                 <button type="button" @click="closeMemberModal()"
                                     class="bg-orange-600  py-2 px-4 rounded mr-2">İptal</button>
-                                <button type="submit" class="bg-orange-600  py-2 px-4 rounded">Kaydet</button>
+                                <button type="submit" x-text="isEditMode ? 'Güncelle' : 'Kaydet'"
+                                    class="bg-orange-600  py-2 px-4 rounded"></button>
                             </div>
                         </form>
                     </div>
@@ -192,18 +193,37 @@
                 roles: @json($roles),
                 teams: @json($teams),
                 openTeam: false,
+                isEditMode: false, // Güncelleme modunu takip etmek için
                 openRoleModal() {
                     this.openRole = true;
                     this.openTeam = false;
                     document.getElementById('roleForm').reset();
+
                 },
-                openTeamModal() {
+                openEditTeamModal(team) {
+                    if (!team) return; // Boş team objesi varsa işlemi durdur
+
                     this.openTeam = true;
                     this.openRole = false;
-                    document.getElementById('teamForm').reset();
+                    this.isEditMode = true; // Güncelleme moduna geçiyoruz
+
+                    document.getElementById('name_surname').value = team.name_surname;
+                    document.getElementById('x_username').value = team.x_username;
+                    document.getElementById('instagram_username').value = team.instagram_username;
+                    document.getElementById('linkedin_username').value = team.linkedin_username;
+                    document.getElementById('role_id').value = team.role_id;
+                    document.getElementById('status').value = team.status;
+
+                    // Güncelleme URL'si
+                    document.getElementById('teamForm').action = `/admin/ekip-guncelle/${team.id}`;
                 },
-                openEditTeamModal() {
-                    // düzenleme modalı açma kodu
+                openTeamModal() {
+                    this.openRole = false;
+                    this.openTeam = true;
+                    this.isEditMode = false; // Yeni bir üye eklerken
+                    document.getElementById('teamForm').reset();
+                    // Yeni ekleme için formun action URL'si
+                    document.getElementById('teamForm').action = '{{ route('team.create') }}';
                 },
                 closeRoleModal() {
                     this.openRole = false;
@@ -211,7 +231,8 @@
                 },
                 closeMemberModal() {
                     this.openTeam = false;
-                    document.getElementById('teamForm').reset(); // Reset the member form on close
+                    this.isEditMode = false;
+                    document.getElementById('teamForm').reset();
                 },
                 changeStatus(currentStatus, dataId, type, url) {
                     currentStatus = currentStatus ? 1 : 0;
@@ -233,16 +254,36 @@
                     try {
                         const form = document.getElementById('teamForm');
                         const formData = new FormData(form);
+                        const isUpdate = form.action.includes('ekip-guncelle');
+
                         const response = await fetch(form.action, {
-                            method: 'POST',
+                            method: "POST",
                             body: formData,
                         });
+
                         const result = await response.json();
+                        console.log(result); // Gelen yanıtı kontrol et
 
                         if (result.status === 'success') {
+                            if (isUpdate) {
+                                // Güncelleme işleminde mevcut takımı geri gönderilen takım bilgileriyle tamamen değiştir
+                                const updatedTeam = result.team[0]; // Dizinin ilk elemanını al
+                                const teamIndex = this.teams.findIndex(team => team.id ===
+                                    updatedTeam.id);
 
-                            this.teams = [...this.teams, result.team];
+                                if (teamIndex !== -1) {
+                                    this.teams[teamIndex] = {
+                                        ...updatedTeam
+                                    }; // Mevcut takım objesini güncellenmiş takım ile değiştir
+                                } else {
+                                    console.error('Güncelleme için takım bulunamadı!');
+                                }
+                            } else {
+                                // Yeni takım ekleme işleminde takımı ekle
+                                this.teams = [...this.teams, ...result.team]; // Diziyi yay
+                            }
                             form.reset();
+                            this.closeMemberModal(); // Modal'ı kapat
                         } else {
                             alert(result.message);
                         }
