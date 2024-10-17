@@ -1,6 +1,6 @@
-<footer class="bg-slate-800 py-12 px-8 font-sans tracking-wide mt-44">
+<footer class="bg-slate-800 py-12 px-8 tracking-wide mt-44">
     <div
-        class=" mx-auto -mt-44 mb-16 md:max-w-7xl bg-gray-300 rounded-lg overflow-hidden p-10 flex items-end justify-start relative">
+        class="mx-auto -mt-44 mb-16 md:max-w-7xl bg-gray-300 rounded-lg overflow-hidden p-10 flex items-end justify-start relative">
         <iframe width="100%" height="100%" class="absolute inset-0" frameborder="0" title="map" marginheight="0"
             marginwidth="0" scrolling="no"
             src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C7%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=124&amp;iwloc=B&amp;output=embed"

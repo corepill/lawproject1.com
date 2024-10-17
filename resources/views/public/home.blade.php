@@ -137,9 +137,9 @@
         <div class="max-w-7xl mx-auto">
             <x-title heading="Ekibimizle Tanışın"
                 subtext="Her vakanın benzersiz olduğunu anlayarak müşterilerimizin ihtiyaçlarına öncelik
-    veriyoruz. Deneyimli avukatlardan oluşan ekibimiz, hak ettiğiniz ilgiyi ve temsili almanızı sağlayarak size
-    özel çözümler sunmayı taahhüt eder. Kapsamlı uzmanlığımız, çok çeşitli yasal konuları etkin bir şekilde ele
-    almamızı sağlar." />
+        veriyoruz. Deneyimli avukatlardan oluşan ekibimiz, hak ettiğiniz ilgiyi ve temsili almanızı sağlayarak size
+        özel çözümler sunmayı taahhüt eder. Kapsamlı uzmanlığımız, çok çeşitli yasal konuları etkin bir şekilde ele
+        almamızı sağlar." />
             @include('components.teamPeople')
         </div>
         <div class="max-w-7xl px-4 md:px-0 mx-auto">
@@ -148,4 +148,5 @@
             @include('components.blogs')
         </div>
         @include('components.contact')
-    @endsection
+    </div>
+@endsection

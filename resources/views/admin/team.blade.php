@@ -235,14 +235,14 @@
                     document.getElementById('teamForm').reset();
                 },
                 changeStatus(currentStatus, dataId, type, url) {
-                    let newStatus = currentStatus ? 0 : 1; 
+                    let newStatus = currentStatus ? 0 : 1;
                     window.confirmStatusChange(newStatus, dataId, type, url)
                         .then((response) => {
                             if (response === 'success') {
                                 const teamIndex = this.teams.findIndex(team => team.id === dataId);
                                 if (teamIndex !== -1) {
                                     this.teams[teamIndex].status =
-                                    newStatus;
+                                        newStatus;
                                 }
                             }
                         })

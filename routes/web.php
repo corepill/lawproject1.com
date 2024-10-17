@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\CareerController;
 use App\Http\Controllers\Public\PublicController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TeamController;
@@ -39,4 +40,7 @@ Route::prefix('admin')->group(function () {
 
     Route::post('/rol-olustur', [RoleController::class, "store"])->name('role.create');
     Route::delete('/rol-sil/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+
+    Route::get('/kariyer', [CareerController::class, 'index'])->name('career.index');
+    Route::get('/kariyer-ilan-olustur', [CareerController::class, 'create'])->name('career.create');
 });

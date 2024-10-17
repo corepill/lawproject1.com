@@ -22,6 +22,11 @@ class Role extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function career()
+    {
+        return $this->hasMany(Career::class);
+    }
+
     protected static function booted()
     {
         static::deleting(function ($role) {
