@@ -235,20 +235,20 @@
                     document.getElementById('teamForm').reset();
                 },
                 changeStatus(currentStatus, dataId, type, url) {
-                    currentStatus = currentStatus ? 1 : 0;
-                    window.confirmStatusChange(currentStatus, dataId, type, url)
+                    let newStatus = currentStatus ? 0 : 1; 
+                    window.confirmStatusChange(newStatus, dataId, type, url)
                         .then((response) => {
                             if (response === 'success') {
                                 const teamIndex = this.teams.findIndex(team => team.id === dataId);
                                 if (teamIndex !== -1) {
-                                    this.teams[teamIndex].status = !
-                                        currentStatus;
+                                    this.teams[teamIndex].status =
+                                    newStatus;
                                 }
                             }
                         })
                         .catch((error) => {
                             console.log("Durum değişikliği başarısız veya iptal edildi.", error);
-                        })
+                        });
                 },
                 async submitTeamForm() {
                     try {
@@ -266,8 +266,7 @@
 
                         if (result.status === 'success') {
                             if (isUpdate) {
-                                // Güncelleme işleminde mevcut takımı geri gönderilen takım bilgileriyle tamamen değiştir
-                                const updatedTeam = result.team[0]; // Dizinin ilk elemanını al
+                                const updatedTeam = result.team[0];
                                 const teamIndex = this.teams.findIndex(team => team.id ===
                                     updatedTeam.id);
 
@@ -279,6 +278,7 @@
                                     console.error('Güncelleme için takım bulunamadı!');
                                 }
                             } else {
+                                console.log(result.team);
                                 // Yeni takım ekleme işleminde takımı ekle
                                 this.teams = [...this.teams, ...result.team]; // Diziyi yay
                             }

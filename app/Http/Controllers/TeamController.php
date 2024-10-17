@@ -37,7 +37,7 @@ class TeamController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'team' => $teamWithRole,
+                'team' => [$teamWithRole],
             ]);
         } catch (\Exception $e) {
             return redirect()->back()->withErrors(["Hata" => "Bir hata oluştu: " . $e->getMessage()]);
