@@ -7,6 +7,7 @@ use App\Models\Career;
 use App\Models\Role;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class CareerController extends Controller
 {
@@ -35,6 +36,50 @@ class CareerController extends Controller
       return redirect()->route('careers.index');
     } catch (\Exception $e) {
       return redirect()->back()->withErrors(['Hata' => 'Beklenmeyen bir hata oluştu: ' . $e->getMessage()]);
+    }
+  }
+
+  public function edit($slug)
+  {
+    $roles = Role::all();
+    $career = Career::where('slug', $slug)->firstOrFail();
+    return view('admin.careerCreateAndUpdate', compact('career', "roles"));
+  }
+
+  public function update(CareerRequest $request, $slug)
+  {
+    try {
+      $announcement = Career::where('slug', $slug)->firstOrFail();
+      // if ($announcement->user_id != auth()->id()) {
+      //     return redirect()->back()->withErrors(['Hata' => 'Bu duyuruyu güncelleme yetkiniz yok.']);
+      // }
+
+      $data = $request->validated();
+      $data['slug'] = AppServiceProvider::slugCheck($data['title'], Career::class, $announcement->slug);
+      $data['status'] = $request->has('status') ? 1 : 0;
+
+      $announcement->update($data);
+
+      alert()->success('Başarılı', "Duyuru güncelleme işlemi başarılı!")->showConfirmButton('Tamam')->autoClose(5000);
+      return redirect('admin/duyurular');
+    } catch (\Exception $e) {
+      return redirect()->back()->withErrors(['Hata' => 'Beklenmeyen bir hata oluştu: ' . $e->getMessage()]);
+    }
+  }
+
+  public function destroy($id)
+  {
+    try {
+      // Makaleyi bul
+      $career = Career::find($id);
+      if (!$career) {
+        return Response::json(['status' => 'error', 'message' => 'Kariyer ilanı bulunamadı!'], 404);
+      }
+
+      $career->delete();
+      return Response::json(['status' => 'success', 'message' => 'Kariyer ilanı başarıyla silindi!']);
+    } catch (\Exception $e) {
+      return Response::json(['status' => 'failed', 'message' => 'Kariyer ilanı silme işlemi başarısız!']);
     }
   }
 }

@@ -23,7 +23,8 @@ class CareerRequest extends FormRequest
     {
         return [
             'role_id' => "required",
-            'time' => "required",
+            'start_time' => "required",
+            'end_time' => "required",
             'location' => "required",
             'type' => "required",
             'content' => "required",
@@ -34,7 +35,8 @@ class CareerRequest extends FormRequest
     {
         return [
             'role_id' => 'Rol alanı zorunludur.',
-            'time' => 'Zaman alanı zorunludur.',
+            'end_time' => 'Zaman alanı zorunludur.',
+            'start_time' => 'Zaman alanı zorunludur.',
             'location' => 'Lokasyon alanı zorunludur.',
             'type' => 'Tip alanı zorunludur.',
             'content' => 'İçerik alanı zorunludur.',

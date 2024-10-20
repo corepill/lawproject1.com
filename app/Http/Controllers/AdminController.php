@@ -12,7 +12,7 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
-    public function changeStatus(Request $request, $model)
+    public function changeStatus(Request $request)
     {
         $model = $request->type;
         $modelClass = 'App\\Models\\' . ucfirst($model);

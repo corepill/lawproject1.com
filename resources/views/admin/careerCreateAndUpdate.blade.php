@@ -12,7 +12,6 @@
             <div class="text-red-500 mb-5">{{ $error }}</div>
         @endforeach
     @endif
-
     <form method="POST" enctype="multipart/form-data" class="space-y-5"
         action="{{ isset($career) ? route('careers.edit', $career->slug) : route('careers.create') }}">
         @csrf
@@ -30,16 +29,18 @@
 
         <select name="type" id="type" class="border border-orange-600 rounded-md px-1 py-2 w-full">
             <option value="{{ null }}">Çalışma Türü</option>
-            <option value="Tam Zamanlı">Tam Zamanlı</option>
-            <option value="Yarı Zamanlı">Yarı Zamanlı</option>
-            <option value="Proje Bazlı">Proje Bazlı</option>
+            <option value="Tam Zamanlı" {{ isset($career) && $career->type == 'Tam Zamanlı' ? 'selected' : '' }}>Tam Zamanlı
+            </option>
+            <option value="Yarı Zamanlı" {{ isset($career) && $career->type == 'Yarı Zamanlı' ? 'selected' : '' }}>Yarı
+                Zamanlı</option>
+            <option value="Proje Bazlı" {{ isset($career) && $career->type == 'Proje Bazlı' ? 'selected' : '' }}>Proje
+                Bazlı</option>
         </select>
 
         <div x-data="{
-            startTime: null,
-            endTime: null,
+            startTime: '{{ isset($career) ? $career->start_time : '09:00' }}',
+            endTime: '{{ isset($career) ? $career->end_time : '09:30' }}',
             availableTimes: [],
-            combinedTime: '', // Tek bir time değeri
             generateTimes() {
                 let start = 9 * 60; // 9:00
                 let end = 18 * 60; // 18:00
@@ -52,38 +53,35 @@
                 let mins = String(minutes % 60).padStart(2, '0');
                 return `${hours}:${mins}`;
             },
-            updateCombinedTime() {
-                if (this.startTime && this.endTime) {
-                    this.combinedTime = `${this.startTime} - ${this.endTime}`;
-                }
-            }
-        }" x-init="generateTimes()" class="flex space-x-5">
+        }" x-init="generateTimes();" class="flex space-x-5">
             <div class="w-1/2">
                 <label for="start_time" class="block text-sm font-medium text-gray-700">Başlangıç Saati</label>
-                <select id="start_time" x-model="startTime" x-on:change="updateCombinedTime"
+                <select name="start_time" id="start_time" x-model="startTime"
                     class="border border-orange-600 rounded-md px-1 py-2 w-full">
                     <template x-for="(time, index) in availableTimes" :key="index">
-                        <option :value="time" x-text="time"></option>
+                        <option :value="time" x-text="time" :selected="time === startTime"></option>
                     </template>
                 </select>
             </div>
             <div class="w-1/2">
                 <label for="end_time" class="block text-sm font-medium text-gray-700">Bitiş Saati</label>
-                <select id="end_time" x-model="endTime" x-on:change="updateCombinedTime"
+                <select name="end_time" id="end_time" x-model="endTime"
                     class="border border-orange-600 rounded-md px-1 py-2 w-full">
                     <template x-for="(time, index) in availableTimes" :key="index">
-                        <option :value="time" x-text="time" :disabled="startTime && time <= startTime"></option>
+                        <option :value="time" x-text="time" :disabled="startTime && time <= startTime"
+                            :selected="time === endTime"></option>
                     </template>
                 </select>
             </div>
-
-            <!-- Tek time değeri form ile gönderiliyor -->
-            <input type="hidden" name="time" :value="combinedTime">
         </div>
 
 
         <textarea name="content" id="summernote">{!! isset($career) ? $career->content : '' !!}</textarea>
-
+        <div class="formItem">
+            <label for="status">Sayfada görünsün mü ?</label>
+            <input class="formCheckbox" type="checkbox" value="1" id="status" name="status"
+                {{ isset($career) && $career->status ? 'checked' : '' }}>
+        </div>
         <button class="bg-orange-600 px-5 py-2 rounded">{{ isset($career) ? 'Kaydet' : 'Paylaş' }}</button>
     </form>
 

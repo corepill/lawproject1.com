@@ -23,7 +23,7 @@ Route::get('/iletisim', [PublicController::class, "contact"]);
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, "dashboard"]);
-    Route::post('/{model}/changeStatus', [AdminController::class, 'changeStatus']);
+    Route::post('/changeStatus', [AdminController::class, 'changeStatus']);
 
     Route::get('/duyurular', [AnnouncementController::class, 'index'])->name('announcements.index');
     Route::get('/duyuru-olustur', [AnnouncementController::class, 'create'])->name('announcements.create');
@@ -44,4 +44,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/kariyer', [CareerController::class, 'index'])->name('careers.index');
     Route::get('/kariyer-ilan-olustur', [CareerController::class, 'create'])->name('careers.create');
     Route::post('/kariyer-ilan-olustur', [CareerController::class, 'store']);
+    Route::get("/kariyer-guncelle/{slug}", [CareerController::class, "edit"])
+        ->name("careers.edit");
+    Route::post("/kariyer-guncelle/{slug}", [CareerController::class, "update"]);
+    Route::delete('/kariyer-sil/{id}', [CareerController::class, 'destroy'])->name('careers.delete');
 });
