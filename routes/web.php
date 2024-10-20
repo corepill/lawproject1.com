@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/rol-olustur', [RoleController::class, "store"])->name('role.create');
     Route::delete('/rol-sil/{id}', [RoleController::class, 'destroy'])->name('role.delete');
 
-    Route::get('/kariyer', [CareerController::class, 'index'])->name('career.index');
-    Route::get('/kariyer-ilan-olustur', [CareerController::class, 'create'])->name('career.create');
+    Route::get('/kariyer', [CareerController::class, 'index'])->name('careers.index');
+    Route::get('/kariyer-ilan-olustur', [CareerController::class, 'create'])->name('careers.create');
+    Route::post('/kariyer-ilan-olustur', [CareerController::class, 'store']);
 });

@@ -17,8 +17,8 @@ class Career extends Model
         return $this->hasOne(User::class);
     }
 
-    public function role(): HasOne
+    public function role()
     {
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
 }

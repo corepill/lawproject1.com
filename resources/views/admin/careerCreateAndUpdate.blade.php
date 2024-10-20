@@ -1,11 +1,11 @@
 @extends('layouts.admin.admin')
 @section('title')
-    Kariyer İlanı {{ isset($announcement) ? 'Güncelle' : 'Oluştur' }}
+    Kariyer İlanı {{ isset($career) ? 'Güncelle' : 'Oluştur' }}
 @endsection
 @section('css')
 @endsection
 @section('content')
-    <h2 class="text-3xl mb-6">{{ isset($announcement) ? 'Kariyer İlanı Güncelle' : 'Kariyer İlanı Oluştur' }}</h2>
+    <h2 class="text-3xl mb-6">{{ isset($career) ? 'Kariyer İlanı Güncelle' : 'Kariyer İlanı Oluştur' }}</h2>
 
     @if ($errors->any())
         @foreach ($errors->all() as $error)
@@ -14,22 +14,21 @@
     @endif
 
     <form method="POST" enctype="multipart/form-data" class="space-y-5"
-        action="{{ isset($announcement) ? route('announcements.edit', $announcement->slug) : route('announcements.create') }}">
+        action="{{ isset($career) ? route('careers.edit', $career->slug) : route('careers.create') }}">
         @csrf
 
-        <select name="category_id" id="role_id" class="border border-orange-600 rounded-md px-1 py-2 w-full">
+        <select name="role_id" id="role_id" class="border border-orange-600 rounded-md px-1 py-2 w-full">
             <option value="{{ null }}">Pozisyon Seçiniz</option>
             @foreach ($roles as $item)
-                <option value="{{ $item->id }}"
-                    {{ isset($announcement) && $announcement->category_id == $item->id ? 'selected' : '' }}>
+                <option value="{{ $item->id }}" {{ isset($career) && $career->role_id == $item->id ? 'selected' : '' }}>
                     {{ $item->name }}
                 </option>
             @endforeach
         </select>
 
-        <x-input-field type="text" for="location" title="Lokasyon" :item="$announcement->location ?? null" />
+        <x-input-field type="text" for="location" title="Lokasyon" :item="$career->location ?? null" />
 
-        <select name="work_type" id="work_type" class="border border-orange-600 rounded-md px-1 py-2 w-full">
+        <select name="type" id="type" class="border border-orange-600 rounded-md px-1 py-2 w-full">
             <option value="{{ null }}">Çalışma Türü</option>
             <option value="Tam Zamanlı">Tam Zamanlı</option>
             <option value="Yarı Zamanlı">Yarı Zamanlı</option>
@@ -40,6 +39,7 @@
             startTime: null,
             endTime: null,
             availableTimes: [],
+            combinedTime: '', // Tek bir time değeri
             generateTimes() {
                 let start = 9 * 60; // 9:00
                 let end = 18 * 60; // 18:00
@@ -51,11 +51,16 @@
                 let hours = String(Math.floor(minutes / 60)).padStart(2, '0');
                 let mins = String(minutes % 60).padStart(2, '0');
                 return `${hours}:${mins}`;
+            },
+            updateCombinedTime() {
+                if (this.startTime && this.endTime) {
+                    this.combinedTime = `${this.startTime} - ${this.endTime}`;
+                }
             }
         }" x-init="generateTimes()" class="flex space-x-5">
             <div class="w-1/2">
                 <label for="start_time" class="block text-sm font-medium text-gray-700">Başlangıç Saati</label>
-                <select name="start_time" id="start_time" x-model="startTime"
+                <select id="start_time" x-model="startTime" x-on:change="updateCombinedTime"
                     class="border border-orange-600 rounded-md px-1 py-2 w-full">
                     <template x-for="(time, index) in availableTimes" :key="index">
                         <option :value="time" x-text="time"></option>
@@ -64,18 +69,22 @@
             </div>
             <div class="w-1/2">
                 <label for="end_time" class="block text-sm font-medium text-gray-700">Bitiş Saati</label>
-                <select name="end_time" id="end_time" x-model="endTime"
+                <select id="end_time" x-model="endTime" x-on:change="updateCombinedTime"
                     class="border border-orange-600 rounded-md px-1 py-2 w-full">
                     <template x-for="(time, index) in availableTimes" :key="index">
                         <option :value="time" x-text="time" :disabled="startTime && time <= startTime"></option>
                     </template>
                 </select>
             </div>
+
+            <!-- Tek time değeri form ile gönderiliyor -->
+            <input type="hidden" name="time" :value="combinedTime">
         </div>
 
-        <textarea name="content" id="summernote">{!! isset($announcement) ? $announcement->content : '' !!}</textarea>
 
-        <button class="bg-orange-600 px-5 py-2 rounded">{{ isset($announcement) ? 'Kaydet' : 'Paylaş' }}</button>
+        <textarea name="content" id="summernote">{!! isset($career) ? $career->content : '' !!}</textarea>
+
+        <button class="bg-orange-600 px-5 py-2 rounded">{{ isset($career) ? 'Kaydet' : 'Paylaş' }}</button>
     </form>
 
 @endsection
