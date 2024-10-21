@@ -49,19 +49,20 @@ class CareerController extends Controller
   public function update(CareerRequest $request, $slug)
   {
     try {
-      $announcement = Career::where('slug', $slug)->firstOrFail();
-      // if ($announcement->user_id != auth()->id()) {
+      $career = Career::where('slug', $slug)->firstOrFail();
+      // if ($career->user_id != auth()->id()) {
       //     return redirect()->back()->withErrors(['Hata' => 'Bu duyuruyu güncelleme yetkiniz yok.']);
       // }
 
       $data = $request->validated();
-      $data['slug'] = AppServiceProvider::slugCheck($data['title'], Career::class, $announcement->slug);
+      $role = Role::findOrFail($data['role_id']);
+      $data['slug'] = AppServiceProvider::slugCheck($role['name'], Career::class);
       $data['status'] = $request->has('status') ? 1 : 0;
 
-      $announcement->update($data);
+      $career->update($data);
 
       alert()->success('Başarılı', "Duyuru güncelleme işlemi başarılı!")->showConfirmButton('Tamam')->autoClose(5000);
-      return redirect('admin/duyurular');
+      return redirect('admin/kariyer');
     } catch (\Exception $e) {
       return redirect()->back()->withErrors(['Hata' => 'Beklenmeyen bir hata oluştu: ' . $e->getMessage()]);
     }

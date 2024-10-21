@@ -1,22 +1,22 @@
 @extends('admin.dashboard')
 @section('title')
-    Kariyer İlan
+    Hizmetler
 @endsection
 @section('css')
 @endsection
 @section('content')
     <div x-data="career()">
         <div class="flex justify-between items-center mb-5">
-            <h2 class="text-3xl">Kariyer İlan</h2>
-            <a href="kariyer-ilan-olustur" class="bg-orange-600 py-2 px-8 rounded">Yeni</a>
+            <h2 class="text-3xl">Hizmetler</h2>
+            <a href="hizmet-olustur" class="bg-orange-600 py-2 px-8 rounded">Yeni</a>
         </div>
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white">
                 <thead class="bg-gray-100 whitespace-nowrap">
                     <tr>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Başlık</th>
-                        <th class="p-4 text-left text-xs font-semibold text-gray-800">Lokasyon</th>
-                        <th class="p-4 text-left text-xs font-semibold text-gray-800">Tür</th>
+                        <th class="p-4 text-left text-xs font-semibold text-gray-800">Görsel</th>
+                        <th class="p-4 text-left text-xs font-semibold text-gray-800">Ziyaretci</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Durumu</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Oluşturma Tarihi</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Ayarlar</th>
@@ -61,7 +61,7 @@
     </div>
 @endsection
 
-@section('js')
+{{-- @section('js')
     <script src="{{ asset('assets/js/common.js') }}"></script>
     <script>
         function career() {
@@ -97,4 +97,4 @@
             };
         }
     </script>
-@endsection
+@endsection --}}

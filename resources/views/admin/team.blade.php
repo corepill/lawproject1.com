@@ -22,7 +22,7 @@
                     <tr>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Ad Soyad</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Rol</th>
-                        <th class="p-4 text-left text-xs font-semibold text-gray-800">Fotoğraf</th>
+                        <th class="p-4 text-left text-xs font-semibold text-gray-800">Görsel</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Durum</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Oluşturma Tarihi</th>
                         <th class="p-4 text-left text-xs font-semibold text-gray-800">Ayarlar</th>

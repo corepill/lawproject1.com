@@ -5,6 +5,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\Public\PublicController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,4 +49,7 @@ Route::prefix('admin')->group(function () {
         ->name("careers.edit");
     Route::post("/kariyer-guncelle/{slug}", [CareerController::class, "update"]);
     Route::delete('/kariyer-sil/{id}', [CareerController::class, 'destroy'])->name('careers.delete');
+
+    Route::get('/hizmetler', [ServicesController::class, 'index'])->name('services.index');
+    Route::get('/hizmet-olustur', [ServicesController::class, 'create'])->name('services.create');
 });
