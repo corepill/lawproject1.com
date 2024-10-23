@@ -35,4 +35,5 @@ class ImageService
             Storage::disk('public')->delete(str_replace('storage/', '', $oldImagePath));
         }
     }
+
 }

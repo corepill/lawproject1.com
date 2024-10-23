@@ -22,7 +22,19 @@ class ServicesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image_path' => 'nullable|image|mimes:jpeg,jpg,png,webp',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'Başlık alanı zorunlu.',
+            'title.max' => 'Başlık alanı 255 karakterden uzun olamaz.',
+            'content.required' => 'İçerik alanı zorunlu.',
+            'image_path.mimes' => 'Görsel dosyası, jpeg, jpg, png veya webp formatında olmalıdır.',
         ];
     }
 }

@@ -25,6 +25,8 @@ Route::get('/iletisim', [PublicController::class, "contact"]);
 Route::prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, "dashboard"]);
     Route::post('/changeStatus', [AdminController::class, 'changeStatus']);
+    Route::post('/delete-images', [ServicesController::class, 'deleteImages'])->name('delete.images');
+    Route::post('/upload-images', [ServicesController::class, 'uploadTempFile'])->name('upload.images');
 
     Route::get('/duyurular', [AnnouncementController::class, 'index'])->name('announcements.index');
     Route::get('/duyuru-olustur', [AnnouncementController::class, 'create'])->name('announcements.create');
@@ -52,4 +54,5 @@ Route::prefix('admin')->group(function () {
 
     Route::get('/hizmetler', [ServicesController::class, 'index'])->name('services.index');
     Route::get('/hizmet-olustur', [ServicesController::class, 'create'])->name('services.create');
+    Route::post('/hizmet-olustur', [ServicesController::class, 'store']);
 });

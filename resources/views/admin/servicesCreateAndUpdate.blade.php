@@ -60,7 +60,7 @@
                 // Eğer silinecek resim varsa
                 if (imagesToDelete.length > 0) {
                     $.ajax({
-
+                        url: '{{ route('delete.images') }}',
                         method: 'POST',
                         data: {
                             images: imagesToDelete,
@@ -84,13 +84,12 @@
                 formData.append('file', file);
 
                 $.ajax({
-                    url: '/admin/upload-image',
+                    url: '/admin/upload-images',
                     method: 'POST',
                     data: formData,
                     processData: false,
                     contentType: false,
                     success: function(response) {
-                        // Görseli summernote'a ekliyoruz
                         $('#summernote').summernote('insertImage', response.path);
                     },
                     error: function(error) {

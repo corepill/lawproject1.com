@@ -52,14 +52,17 @@ class TeamController extends Controller
             $data['user_id'] = 1;
 
             if ($request->hasFile('photo')) {
-                // Eski resmi sil
-                if ($team->photo) {
-                    ImageService::deleteImage($team->photo);
-                }
+
 
                 // Yeni resmi yükle
                 $filePath = ImageService::uploadImage($request->file('photo'), "team");
                 $data['photo'] = "storage/" . $filePath;
+
+
+                // Eski resmi sil
+                if ($team->photo) {
+                    ImageService::deleteImage($team->photo);
+                }
             }
             $team->update($data);
 

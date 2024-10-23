@@ -54,7 +54,9 @@
                         </tr>
                     </template>
                 </tbody>
-
+                @foreach ($services as $service)
+                {!! $service->content !!}
+                @endforeach
 
             </table>
         </div>

@@ -29,8 +29,8 @@
                     title: 'Hizmetler',
                     icon: 'fa-handshake',
                     links: [
-                        { title: 'Hizmet Oluştur', href: '/admin/portfoy-olustur' },
-                        { title: 'Hizmet Listesi', href: '/admin/portfoy' }
+                        { title: 'Hizmet Oluştur', href: '/admin/hizmet-olustur' },
+                        { title: 'Hizmet Listesi', href: '/admin/hizmetler' }
                     ]
                 },
                 {
