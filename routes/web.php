@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Public\PublicController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ServicesController;
@@ -43,6 +44,11 @@ Route::prefix('admin')->group(function () {
 
     Route::post('/rol-olustur', [RoleController::class, "store"])->name('role.create');
     Route::delete('/rol-sil/{id}', [RoleController::class, 'destroy'])->name('role.delete');
+
+    Route::get('/kategoriler', [CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/kategori-olustur', [CategoryController::class, 'store'])->name('category.create');
+    Route::post('/kategori-guncelle/{id}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/kategori-sil/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
 
     Route::get('/kariyer', [CareerController::class, 'index'])->name('careers.index');
     Route::get('/kariyer-ilan-olustur', [CareerController::class, 'create'])->name('careers.create');
