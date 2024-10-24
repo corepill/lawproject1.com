@@ -103,8 +103,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="flex px-4 py-3 hover:bg-gray-50">
-                            Duyrular
+                        <a href="/duyurular" class="flex px-4 py-3 hover:bg-gray-50">
+                            Duyurular
                         </a>
                     </li>
                 </ul>

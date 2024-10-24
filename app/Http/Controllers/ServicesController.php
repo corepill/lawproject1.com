@@ -7,6 +7,8 @@ use App\Models\Service;
 use App\Providers\AppServiceProvider;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -23,7 +25,11 @@ class ServicesController extends Controller
     {
         return view('admin.servicesCreateAndUpdate');
     }
-
+    public function edit($slug)
+    {
+        $service = Service::where('slug', $slug)->firstOrFail();
+        return view('admin.servicesCreateAndUpdate', compact('service'));
+    }
     public function store(ServicesRequest $request)
     {
         $data = $request->validated();
@@ -48,6 +54,64 @@ class ServicesController extends Controller
         }
     }
 
+    public function update(ServicesRequest $request, $slug)
+    {
+        try {
+            $service = Service::where('slug', $slug)->firstOrFail();
+            $data = $request->validated();
+            $data['status'] = $request->has('status') ? 1 : 0;
+            $data['slug'] = AppServiceProvider::slugCheck($data['title'], Service::class, $service->id);
+
+            if ($request->hasFile('image_path')) {
+                // Yeni resmi yükle
+                $filePath = ImageService::uploadImage($request->file('image_path'), "services");
+                $data['image_path'] = "storage/" . $filePath;
+
+                // Eski resmi sil
+                if (!is_null($service->image_path) && file_exists(public_path($service->image_path))) {
+                    File::delete(public_path($service->image_path));
+                }
+            }
+
+            $service->update($data);
+            $newContent = $this->processAndMoveImages($data['content']);
+            $service->content = $newContent;
+            $service->save();
+
+            // Başarı mesajı
+            alert()->success("Başarılı", "Hizmet güncelleme işlemi başarılı!")->showConfirmButton("Tamam")->autoClose(5000);
+            return redirect('admin/hizmetler');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['Hata' => 'Beklenmeyen bir hata oluştu: ' . $e->getMessage()]);
+        }
+    }
+
+    public function destroy($id)
+    {
+        try {
+            // Makaleyi bul
+            $service = Service::find($id);
+            if (!$service) {
+                return Response::json(['status' => 'error', 'message' => 'Hizmet bulunamadı!'], 404);
+            }
+            $imagePaths = $this->extractImagesFromContent($service->content);
+            foreach ($imagePaths as $image) {
+                $path = str_replace('http://127.0.0.1:8000/storage/', '', $image);
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
+
+            if (!is_null($service->image_path) && file_exists(public_path($service->image_path))) {
+                File::delete(public_path($service->image_path));
+            }
+
+            $service->delete();
+            return Response::json(['status' => 'success', 'message' => 'Hizmet başarıyla silindi!']);
+        } catch (\Exception $e) {
+            return Response::json(['status' => 'failed', 'message' => 'Hizmet silme işlemi başarısız!']);
+        }
+    }
 
     public function uploadTempFile(Request $request)
     {
@@ -114,11 +178,6 @@ class ServicesController extends Controller
 
         return response()->json(['message' => 'Görseller başarıyla silindi.']);
     }
-
-
-
-
-
 
     private function extractImagesFromContent($content)
     {

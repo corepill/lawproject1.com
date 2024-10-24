@@ -55,4 +55,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/hizmetler', [ServicesController::class, 'index'])->name('services.index');
     Route::get('/hizmet-olustur', [ServicesController::class, 'create'])->name('services.create');
     Route::post('/hizmet-olustur', [ServicesController::class, 'store']);
+    Route::get("/hizmet-guncelle/{slug}", [ServicesController::class, "edit"])
+        ->name("services.edit");
+    Route::post("/hizmet-guncelle/{slug}", [ServicesController::class, "update"]);
+    Route::delete('/hizmet-sil/{id}', [ServicesController::class, 'destroy'])->name('services.delete');
 });

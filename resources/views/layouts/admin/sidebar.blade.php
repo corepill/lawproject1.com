@@ -98,10 +98,7 @@
                 <i class="fa-solid fa-layer-group"></i>
                 <span class="mx-4 font-medium">Kariyer</span>
             </a>
-            <a href="/admin/istekler" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
-                <i class="fa-solid fa-layer-group"></i>
-                <span class="mx-4 font-medium">İstekler</span>
-            </a>
+            
             <a href="/admin/ayarlar" class="flex items-center py-3 px-6 text-gray-600 hover:bg-gray-100">
                 <i class="fa-solid fa-gear"></i>
                 <span class="mx-4 font-medium">Ayarlar</span>

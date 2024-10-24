@@ -5,7 +5,7 @@
 @section('css')
 @endsection
 @section('content')
-    <div x-data="career()">
+    <div x-data="service()">
         <div class="flex justify-between items-center mb-5">
             <h2 class="text-3xl">Hizmetler</h2>
             <a href="hizmet-olustur" class="bg-orange-600 py-2 px-8 rounded">Yeni</a>
@@ -23,63 +23,62 @@
                     </tr>
                 </thead>
                 <tbody class="whitespace-nowrap">
-                    <template x-for="career in careers" :key="career.id">
-                        <tr class="hover:bg-gray-50" :data-id="career.id">
-                            <td class="p-4 text-[15px] text-gray-800" x-text="career.role.name"></td>
-                            <td class="p-4 text-[15px] text-gray-800" x-text="career.location"></td>
-                            <td class="p-4 text-[15px] text-gray-800" x-text="career.type"></td>
+                    <template x-for="service in services" :key="service.id">
+                        <tr class="hover:bg-gray-50" :data-id="service.id">
+                            <td class="p-4 text-[15px] text-gray-800" x-text="service.title"></td>
+                            <td class="p-4 text-[15px] text-gray-800">
+                                <img :src="`${window.location.origin}/${service.image_path}`" alt="Service Image"
+                                    class="w-16 h-16 object-cover">
+                            </td>
+                            <td class="p-4 text-[15px] text-gray-800" x-text="service.view_count"></td>
                             <td class="p-4 text-[15px] text-gray-800">
                                 <a href="javascript:void(0)"
                                     :class="{
-                                        'bg-green-500': career.status,
-                                        'bg-red-500': !career.status
+                                        'bg-green-500': service.status,
+                                        'bg-red-500': !service.status
                                     }"
                                     class="py-2 px-4 rounded"
-                                    @click="changeStatus(career.status, career.id, 'career', '{{ url('admin/changeStatus') }}')">
-                                    <span x-text="career.status ? 'Aktif' : 'Pasif'"></span>
+                                    @click="changeStatus(service.status, service.id, 'service', '{{ url('admin/changeStatus') }}')">
+                                    <span x-text="service.status ? 'Aktif' : 'Pasif'"></span>
                                 </a>
                             </td>
                             <td class="p-4 text-[15px] text-gray-800">
-                                <span x-text="new Date(career.created_at).toLocaleDateString('tr-TR')"></span>
+                                <span x-text="new Date(service.created_at).toLocaleDateString('tr-TR')"></span>
                             </td>
                             <td class="p-4">
-                                <a class="mr-4" title="Edit" :href="`{{ route('careers.edit', '') }}/${career.slug}`">
+                                <a class="mr-4" title="Edit" :href="`{{ route('services.edit', '') }}/${service.slug}`">
                                     <i class="fa-regular fa-pen-to-square text-blue-500"></i>
                                 </a>
                                 <a class="mr-4 btnDelete" href="javascript:void(0)"
-                                    @click="confirmDelete(career.id, '{{ url('admin/kariyer-sil') }}')">
+                                    @click="confirmDelete(service.id, '{{ url('admin/hizmet-sil') }}')">
                                     <i class="fa-solid fa-trash-can text-red-500"></i>
                                 </a>
                             </td>
                         </tr>
                     </template>
                 </tbody>
-                @foreach ($services as $service)
-                {!! $service->content !!}
-                @endforeach
-
             </table>
         </div>
     </div>
 @endsection
 
-{{-- @section('js')
+@section('js')
     <script src="{{ asset('assets/js/common.js') }}"></script>
     <script>
-        function career() {
+        function service() {
             return {
-                careers: @json($careers), // Duyuruları burada tanımlayın
+                services: @json($services), // Duyuruları burada tanımlayın
                 changeStatus(currentStatus, dataId, type, url) {
 
                     currentStatus = currentStatus ? 1 : 0;
                     window.confirmStatusChange(currentStatus, dataId, type, url)
                         .then((response) => {
                             if (response === 'success') {
-                                const careerIndex = this.careers.findIndex(career => career
+                                const serviceIndex = this.services.findIndex(service => service
                                     .id === dataId);
-                                if (careerIndex !== -1) {
+                                if (serviceIndex !== -1) {
                                     // Durumu tersine çevir
-                                    this.careers[careerIndex].status = !currentStatus;
+                                    this.services[serviceIndex].status = !currentStatus;
                                 }
                             }
                         })
@@ -99,4 +98,4 @@
             };
         }
     </script>
-@endsection --}}
+@endsection
